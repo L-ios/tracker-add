@@ -38,7 +38,7 @@ for id in $ids ; do
     add_date="$(transmission-remote "$host" --auth="$auth" --torrent "$id" --info| grep '^  Date added: ' |cut -c 21-)"
     add_date_t="$(date -d "$add_date" "+%Y-%m-%d %H:%M")"
     dater="$(date "+%Y-%m-%d %H:%M")"
-    dateo="$(date -D '%s' -d "$(( `date +%s`+1*60 ))" "+%Y-%m-%d %H:%M")"
+    dateo="$(date -d "@$(( `date +%s`+1*60 ))" "+%Y-%m-%d %H:%M")"
 
 if [ ! -f "/tmp/TTAA.$id.lock" ]; then
 if [[ "( "$(add_date_t)" == "$(dater)" || "$(add_date_t)" == "$(dateo)" )" ]]; then
